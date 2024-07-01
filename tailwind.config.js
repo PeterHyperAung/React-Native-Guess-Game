@@ -15,6 +15,10 @@ module.exports = {
         primary800: "#3b021f",
         accent500: "#ddb52f",
       },
+      fontFamily: {
+        ["open-sans"]: ["open-sans"],
+        ["open-sans-bold"]: ["open-sans-bold"],
+      },
     },
   },
   plugins: [],

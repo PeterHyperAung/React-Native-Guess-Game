@@ -1,4 +1,4 @@
-import { View, Alert, FlatList } from "react-native";
+import { View, Alert, FlatList, ScrollView } from "react-native";
 import Title from "../components/ui/Title";
 import { useState, useEffect, useMemo } from "react";
 import NumberContainer from "../components/game/NumberContainer";
@@ -67,34 +67,40 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     setRounds((prevRounds) => [currentGuess, ...prevRounds]);
   }
 
-  return (
-    <View className="flex-1 p-[12px]">
-      <Title>Opponent's Guess</Title>
-      <NumberContainer>{currentGuess}</NumberContainer>
-      {/* GUESS */}
-      <View className="mb-5">
-        <InstructionText className="my-5">Higher or Lower?</InstructionText>
-        <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-            <Ionicons name="md-add" size={24} color="white" />
-          </PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
-            <Ionicons name="md-remove" size={24} color="white" />
-          </PrimaryButton>
+  const renderHeader = () => {
+    return (
+      <View className="mt-10 px-3">
+        <Title>Opponent's Guess</Title>
+        <NumberContainer>{currentGuess}</NumberContainer>
+        {/* GUESS */}
+        <View className="mb-5 bg-primary700 p-2 pb-4 rounded-xl">
+          <InstructionText className="my-3">Higher or Lower?</InstructionText>
+          <View>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              <Ionicons name="add-outline" size={24} color="white" />
+            </PrimaryButton>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
+              <Ionicons name="remove-outline" size={24} color="white" />
+            </PrimaryButton>
+          </View>
         </View>
       </View>
-      <FlatList
-        data={rounds}
-        renderItem={({ item, index }) => {
-          return (
-            <LogItem index={index} total={rounds.length}>
-              {item}
-            </LogItem>
-          );
-        }}
-        keyExtractor={(item) => item}
-      />
-    </View>
+    );
+  };
+
+  return (
+    <FlatList
+      ListHeaderComponent={renderHeader}
+      data={rounds}
+      renderItem={({ item, index }) => {
+        return (
+          <LogItem index={index} total={rounds.length}>
+            {item}
+          </LogItem>
+        );
+      }}
+      keyExtractor={(item) => item}
+    />
   );
 };
 

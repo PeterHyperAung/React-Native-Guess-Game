@@ -81,7 +81,7 @@ export default function App() {
         className="flex-1"
         imageStyle={{ opacity: 0.15 }}
       >
-        <SafeAreaView className="flex-1 mt-[20px]">{screen}</SafeAreaView>
+        <SafeAreaView className="flex-1">{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
