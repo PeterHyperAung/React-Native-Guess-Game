@@ -26,6 +26,7 @@ function StartGameScreen({ onPickNumber }) {
 
   const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredNumber);
+
     console.log(enteredNumber);
 
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
